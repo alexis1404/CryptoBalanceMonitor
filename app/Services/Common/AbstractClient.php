@@ -11,16 +11,17 @@ abstract class AbstractClient
 {
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
-
-    /** @var Client */
-    private $client;
+    /** @var Client|null */
+    private ?Client $client = null;
 
     abstract protected function createDefaultClient(): Client;
+
     private function getDefaultClient(): Client
     {
-        return $this->client === null
-            ? $this->client = $this->createDefaultClient()
-            : clone $this->client;
+        if ($this->client === null) {
+            $this->client = $this->createDefaultClient();
+        }
+        return $this->client;
     }
 
     protected function prepareOptions(array &$options): void
@@ -38,7 +39,6 @@ abstract class AbstractClient
         string $method,
         string $uri,
         array $body = [],
-        ?string $jmsResponseType = null,
         ?Client $customClient = null
     ) {
         return $this->sendRequestWithoutParams(
@@ -88,6 +88,12 @@ abstract class AbstractClient
             throw new IncorrectStatusCodeException($response);
         }
 
-        return $response->getBody()->getContents();
+        $result = $response->getBody()->getContents();
+
+        if (json_validate($result)) {
+            return json_decode($result, true);
+        }
+
+        return $result;
     }
 }

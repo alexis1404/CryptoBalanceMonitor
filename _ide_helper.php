@@ -17,7 +17,7 @@ namespace App\Facades {
      * 
      *
      */
-    class DecimalHelper {
+    class DecimalHelperFacade {
         /**
          * 
          *
@@ -140,7 +140,7 @@ namespace Illuminate\Http {
 
 
 namespace  {
-    class DecimalHelper extends \App\Facades\DecimalHelper {}
+    class DecimalHelper extends \App\Facades\DecimalHelperFacade {}
 }
 
 

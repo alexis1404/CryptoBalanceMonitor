@@ -125,7 +125,7 @@ return [
 
     'aliases' => [
         // ... другие алиасы
-        'DecimalHelper' => \App\Facades\DecimalHelper::class,
+        'DecimalHelper' => \App\Facades\DecimalHelperFacade::class,
     ],
 
 ];
