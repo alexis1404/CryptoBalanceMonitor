@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-namespace App\WalletAdapters\BTCAdapter\Base;
+namespace App\WalletAdapters\BTCAdapter\Balance;
 
 use App\Exceptions\CurrencyException;
 use App\Exceptions\IncorrectStatusCodeException;
