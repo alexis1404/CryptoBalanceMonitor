@@ -123,4 +123,9 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+        // ... другие алиасы
+        'DecimalHelper' => \App\Facades\DecimalHelper::class,
+    ],
+
 ];
