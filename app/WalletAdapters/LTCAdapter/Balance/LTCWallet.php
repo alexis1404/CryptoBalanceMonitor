@@ -30,6 +30,9 @@ class LTCWallet implements WalletStandardInterface
             throw new CurrencyException($exception->getMessage());
         }
 
-        return DecimalHelperFacade::numberWithoutPrecisionToDecimal($networkBalanceResult['final_balance'], self::LTC_DECIMAL);
+        return DecimalHelperFacade::numberWithoutPrecisionToDecimal(
+            $networkBalanceResult['final_balance'],
+            config('currencies.assets_data.ltc.decimal')
+        );
     }
 }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateWalletRequest;
 use App\Http\Requests\WalletIdRequest;
 
 class BaseCryptoBalanceController extends Controller
@@ -17,7 +18,7 @@ class BaseCryptoBalanceController extends Controller
         dd($request->wallet());
     }
 
-    public function addWallet()
+    public function addWallet(CreateWalletRequest $request)
     {
         dd(333);
     }

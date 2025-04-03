@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class CreateWalletRequest extends FormRequest
 {
@@ -21,8 +22,20 @@ class CreateWalletRequest extends FormRequest
      */
     public function rules(): array
     {
+        $allowedTickers = array_column(config('currencies.assets_data', []), 'ticker');
         return [
-
+            'assetTicker' => ['required', 'string', 'in:' . implode(',', $allowedTickers)],
+            'walletId' => 'required|unique:wallets,wallet_id',
+            'address' => 'required|string|unique:wallets',
+            'balance' => 'nullable|numeric',
         ];
+    }
+
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        throw new ValidationException($validator, response()->json([
+            'message' => 'Validation failed',
+            'errors' => $validator->errors(),
+        ], 422));
     }
 }

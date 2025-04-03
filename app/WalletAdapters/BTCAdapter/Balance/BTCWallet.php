@@ -11,8 +11,6 @@ use App\WalletAdapters\WalletAdapterInterfaces\WalletStandardInterface;
 
 class BTCWallet implements WalletStandardInterface
 {
-    const BTC_DECIMAL = 8;
-
     /** @var BTCExplorerClient */
     protected BTCExplorerClient $btcExplorerClient;
     public function __construct()
@@ -30,6 +28,9 @@ class BTCWallet implements WalletStandardInterface
             throw new CurrencyException($exception->getMessage());
         }
 
-        return DecimalHelperFacade::numberWithoutPrecisionToDecimal($networkBalanceResult, self::BTC_DECIMAL);
+        return DecimalHelperFacade::numberWithoutPrecisionToDecimal(
+            $networkBalanceResult,
+            config('currencies.assets_data.btc.decimal')
+        );
     }
 }

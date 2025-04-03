@@ -5,19 +5,19 @@ namespace App\WalletAdapters\ETHAdapter\Balance;
 use App\Exceptions\CurrencyException;
 use App\Exceptions\IncorrectStatusCodeException;
 use App\Facades\DecimalHelperFacade;
-use App\WalletAdapters\ETHAdapter\HTTPClient\LTCExplorerClient;
+use App\WalletAdapters\ETHAdapter\HTTPClient\ETHExplorerClient;
 use App\WalletAdapters\WalletAdapterInterfaces\WalletStandardInterface;
 
 class ETHWallet implements WalletStandardInterface
 {
     protected const ETH_DECIMAL = 18; //Отвратительная затея - хранить точность валюты хардкодом. Тикеры валют, их пресижны, etc - выносим в БД (assets) + добвляем эндпоинты для управления ими
     protected const SUCCESS_STATUS_CODE = 'OK';
-    /** @var LTCExplorerClient */
-    protected LTCExplorerClient $ethExplorerClient;
+    /** @var ETHExplorerClient */
+    protected ETHExplorerClient $ethExplorerClient;
 
     public function __construct()
     {
-        $this->ethExplorerClient = new LTCExplorerClient(
+        $this->ethExplorerClient = new ETHExplorerClient(
             config('currencies.explorer.eth'),
             config('currencies.api_key.eth_explorer_api_key')
         );
@@ -35,6 +35,9 @@ class ETHWallet implements WalletStandardInterface
             throw new CurrencyException(strval($networkBalanceResult));
         }
 
-        return DecimalHelperFacade::numberWithoutPrecisionToDecimal($networkBalanceResult['result'], self::ETH_DECIMAL);
+        return DecimalHelperFacade::numberWithoutPrecisionToDecimal(
+            $networkBalanceResult['result'],
+            config('currencies.assets_data.eth.decimal')
+        );
     }
 }
