@@ -22,3 +22,8 @@ _Exapmle:_
 * assetTicker - BTC, ETH or LTC supported
 * walletId - unique wallet identifier (for example, RRUZ67) (string)
 * address - network address
+
+**WARNING!**
+Cron debug disabling: add to .env this:
+
+`CRON_DEBUG_DISABLE=true`

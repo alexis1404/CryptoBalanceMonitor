@@ -130,5 +130,5 @@ return [
         'Route' => Illuminate\Support\Facades\Route::class,
     ],
 
-
+    'cron_debug' => (bool) env('CRON_DEBUG_DISABLE', false),
 ];
