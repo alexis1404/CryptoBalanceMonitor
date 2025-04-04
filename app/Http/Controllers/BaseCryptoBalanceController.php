@@ -46,6 +46,6 @@ class BaseCryptoBalanceController extends Controller
             'balance' => '0',//Initial balance
         ]);
 
-        return JsonResponseServiceFacade::getSuccessResponse(['response' => 'Wallet with address ' .  $request->address .  ' created successfully']);
+        return JsonResponseServiceFacade::getSuccessResponse(['response' => 'Wallet ' .  $wallet->address .  ' created']);
     }
 }

@@ -20,7 +20,7 @@ class WalletIdRequest extends FormRequest
     {
         $walletId = $this->route('walletId');
         $wallet = Wallet::where('wallet_id', $walletId)
-            ->select('wallet_id', 'address', 'asset_ticker', 'balance', 'created_at', 'updated_at')
+            ->select('address', 'balance')
             ->first();
         $this->merge(['wallet' => $wallet]);
     }

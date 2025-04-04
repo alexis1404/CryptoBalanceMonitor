@@ -25,9 +25,9 @@ class WalletRepository implements WalletRepositoryInterface
         $wallet->balance = $newBalance;
         return $wallet->save();
     }
-    public function getAllWithoutId(): \Illuminate\Support\Collection
+    public function getAllWithoutId(): Collection
     {
-        return Wallet::select('wallet_id', 'address', 'asset_ticker', 'balance', 'created_at', 'updated_at')->get();
+        return Wallet::select('wallet_id', 'address', 'asset_ticker', 'balance')->get();
     }
 
 }
