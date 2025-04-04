@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -15,10 +16,12 @@ class WalletIdRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $walletId = $this->route('walletId');
-        $wallet = Wallet::where('wallet_id', $walletId)->first();
+        $wallet = Wallet::where('wallet_id', $walletId)
+            ->select('wallet_id', 'address', 'asset_ticker', 'balance', 'created_at', 'updated_at')
+            ->first();
         $this->merge(['wallet' => $wallet]);
     }
 

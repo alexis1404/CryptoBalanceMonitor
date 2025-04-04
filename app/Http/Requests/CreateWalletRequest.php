@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Requests;
 
@@ -27,11 +28,10 @@ class CreateWalletRequest extends FormRequest
             'assetTicker' => ['required', 'string', 'in:' . implode(',', $allowedTickers)],
             'walletId' => 'required|unique:wallets,wallet_id',
             'address' => 'required|string|unique:wallets',
-            'balance' => 'nullable|numeric',
         ];
     }
 
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator): ValidationException
     {
         throw new ValidationException($validator, response()->json([
             'message' => 'Validation failed',

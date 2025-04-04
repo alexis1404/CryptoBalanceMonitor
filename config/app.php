@@ -126,7 +126,9 @@ return [
     'aliases' => [
         // ... другие алиасы
         'DecimalHelper' => \App\Facades\DecimalHelperFacade::class,
+        'AddressValidation' => App\Facades\AddressValidationFacade::class,
         'Route' => Illuminate\Support\Facades\Route::class,
     ],
+
 
 ];
