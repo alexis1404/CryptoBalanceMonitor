@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Tests\Unit;
 
@@ -16,7 +17,7 @@ class JsonResponseServiceTest extends TestCase
         $this->jsonResponseService = new JsonResponseService();
     }
 
-    public function test_success_response_with_empty_data()
+    public function test_success_response_with_empty_data(): void
     {
         $response = $this->jsonResponseService->getSuccessResponse();
 
@@ -28,7 +29,7 @@ class JsonResponseServiceTest extends TestCase
         );
     }
 
-    public function test_success_response_with_data()
+    public function test_success_response_with_data(): void
     {
         $data = ['key' => 'value', 'number' => 42];
         $response = $this->jsonResponseService->getSuccessResponse($data);
@@ -41,7 +42,7 @@ class JsonResponseServiceTest extends TestCase
         );
     }
 
-    public function test_error_response()
+    public function test_error_response(): void
     {
         $errorMessage = 'Something went wrong';
         $response = $this->jsonResponseService->getErrorResponse($errorMessage);

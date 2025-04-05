@@ -8,6 +8,7 @@ use App\Facades\JsonResponseServiceFacade;
 use App\Http\Requests\CreateWalletRequest;
 use App\Http\Requests\WalletIdRequest;
 use App\Repositories\WalletRepository;
+use Illuminate\Http\JsonResponse;
 
 class BaseCryptoBalanceController extends Controller
 {
@@ -18,14 +19,14 @@ class BaseCryptoBalanceController extends Controller
         $this->walletRepository = $walletRepository;
     }
 
-    public function getWalletList()
+    public function getWalletList(): JsonResponse
     {
         $wallets = $this->walletRepository->getAllWithoutId();
 
         return JsonResponseServiceFacade::getSuccessResponse(['response' => $wallets]);
     }
 
-    public function getWalletById(WalletIdRequest $request)
+    public function getWalletById(WalletIdRequest $request): JsonResponse
     {
         $wallet = $request->wallet();
         if ($wallet === null) {
@@ -34,7 +35,7 @@ class BaseCryptoBalanceController extends Controller
         return JsonResponseServiceFacade::getSuccessResponse(['response' => $wallet]);
     }
 
-    public function addWallet(CreateWalletRequest $request)
+    public function addWallet(CreateWalletRequest $request): JsonResponse
     {
         if (AddressValidationFacade::validate($request->address, $request->assetTicker) !== true) {
             return JsonResponseServiceFacade::getErrorResponse('Address validation failed');

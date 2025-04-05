@@ -10,7 +10,6 @@ use App\WalletAdapters\WalletAdapterInterfaces\WalletStandardInterface;
 
 class ETHWallet implements WalletStandardInterface
 {
-    protected const ETH_DECIMAL = 18; //Отвратительная затея - хранить точность валюты хардкодом. Тикеры валют, их пресижны, etc - выносим в БД (assets) + добвляем эндпоинты для управления ими
     protected const SUCCESS_STATUS_CODE = 'OK';
     /** @var ETHExplorerClient */
     protected ETHExplorerClient $ethExplorerClient;
