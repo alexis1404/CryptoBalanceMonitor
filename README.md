@@ -27,3 +27,14 @@ _Exapmle:_
 Cron debug disabling: add to .env this:
 
 `CRON_DEBUG_DISABLE=true`
+
+**Add to .env:**
+
+BTC_EXPLORER=https://blockchain.info
+LTC_EXPLORER=https://api.blockcypher.com
+
+ETH_EXPLORER=https://api.etherscan.io
+ETH_EXPLORER_API_KEY=YOUR_API_KEY
+
+**Примерчание:**
+Blockchain и blockcypher использованы потому, что на https://blockchair.com/ мой IP давным-давно в блэклисте (очевидно, нагрузку на свой API они восприняли как попытку из задудосить)
